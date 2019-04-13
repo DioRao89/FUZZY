@@ -1,3 +1,9 @@
+'''
+AUTHOR: DIONISIO RIBEIRO
+13/04/2019
+RISK ANALYSIS FUNCTIONS
+'''
+
 from numpy import exp
 import numpy as np
 def tri(x,a1,b2,c3):
