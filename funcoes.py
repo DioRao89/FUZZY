@@ -3,7 +3,6 @@ AUTHOR: DIONISIO RIBEIRO
 13/04/2019
 RISK ANALYSIS FUNCTIONS
 '''
-
 from numpy import exp
 import numpy as np
 def tri(x,a1,b2,c3):
@@ -14,7 +13,8 @@ def gauss(x, delta, c):
     return exp(-0.5*((x-c)/delta)**2)
 def trap(x,d1,d2,d3,d4):
     return max(min((x-d1)/(d2-d1),1,(d4-x)/(d4-d3)),0)
-
+###################################
+#funcoes de entrada
 def fdinheiro_inadequado(x):
     return trap(x,-1,0,0.3,0.5)
 def fdinheiro_medio(x):
@@ -22,17 +22,19 @@ def fdinheiro_medio(x):
 def fdinheiro_adequado(x):
     return trap(x,0.5,0.8,1,1.5)
 
+def fpessoa_baixo(x):
+    return trap(x,-1,0,0.2,0.7)
+def fpessoa_alto(x):
+    return trap(x,0.2,0.7,1,1.5)
+####################
+#funcoes de saida    
 def frisco_peq(x):
     return trap(x,-1,0,0.3,0.6)
 def frisco_norm(x):
     return tri(x,0.4,0.6,0.85)
 def frisco_alto(x):
     return trap(x,0.6,0.85,1,1.5)
-
-def fpessoa_baixo(x):
-    return trap(x,-1,0,0.2,0.7)
-def fpessoa_alto(x):
-    return trap(x,0.2,0.7,1,1.5)
+###############################
 
 def altura(x,d,p):
     #se dinheiro adequado ou pessoal baixo entao risco pequeno
@@ -46,12 +48,17 @@ def altura(x,d,p):
     risco_max = min(risco_max,frisco_alto(x))
     
     return max(risco_max,risco_peq,risco_med)
-
+# integral centro de massa
+    
 def centroide(d,p):
+    #incializar os acumuladores
     area = 0
     altura = 0
     for i in np.arange(0,1.01,0.01):
-            area += i*100*altura(i,d,p)
-            altura +=altura(i,d,p)
+        area += i*100*altura(i,d,p)
+        altura +=altura(i,d,p)
         #print('dinheiro',d, 'pessoa ',p,'risco ',area/altura)    
     return area/altura
+
+
+
